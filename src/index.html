@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tada.team</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles/bundle.css">
+    <link rel="stylesheet" href="styles/reset.css">
+</head>
+<body>
+    <div class="LAYOUT-APP">
+        <div class="chat" id="chat-one">
+            <div class="chat-header">
+                <div class="chat-header__logo">
+                    <img src="assets/icons/logo.png" alt="logo" class="image">
+                </div>
+                <div class="chat-header__title">
+                    <div class="chat-name">Tada task</div>
+                    <div class="user-name">test123</div>
+                </div>
+                <div class="chat-header__settings">
+                    <label for="menuCbx">
+                        <span class="burger"></span>
+                    </label>
+                    <input type="checkbox" class="cbx" id="menuCbx">
+                    <div class="menu">
+                        <ul class="menu-list">
+                            <li class="menu-list__item" data-action="changeUserName">Сменить ник</li>
+                            <li class="menu-list__item" data-action="changeChatName">Сменить название чата</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-body">
+                <ul class="list-msg">
+                </ul>
+            </div>
+            <div class="chat-footer">
+                <div class="chat-footer__ava">
+                    <img src="https://api.adorable.io/avatars/50/abott@adorable.png" class="image">
+                </div>
+                <div class="chat-footer__msg">
+                    <div class="textarea" id="input-msg">
+                        <div class="textarea-cnt" edit></div>
+                    </div>
+                </div>
+                <div class="chat-footer__act">
+                    <div class="btn" id="sndBtn">Отправить</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div id="messages"></div>
+    <input type="text" id="newMsg" placeholder="Write a message...">
+    <button id="sendNewMsg">Send</button>
+    <input type="text" id="newName" placeholder="Your new name">
+    <button id="setNewName">Change</button> -->
+    <script src="scripts/index.js"></script>
+</body>
+</html>

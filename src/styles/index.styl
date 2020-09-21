@@ -1,0 +1,190 @@
+@import 'fonts.styl';
+
+.LAYOUT-APP
+    min-height 100vh
+    height 100%
+    overflow auto
+    font-family Roboto
+
+.chat
+    display flex
+    position absolute
+    left 50%
+    top 50%
+    max-width 600px
+    width 100%
+    min-width 300px
+    height 80vh
+    flex-flow column nowrap
+    transform translate(-50%, -50%)
+    background-color #36393f
+    border-radius 3px
+    box-shadow -2px 2px 5px 2px #00000085
+    &-header
+        display flex
+        padding 0 15px
+        align-items center
+        flex 0 0 50px
+        box-shadow 0 2px 4px 2px #00000038
+        &__logo
+            height 40px
+            .image
+                height 100%
+        &__title
+            flex-grow 1
+            padding 0 20px
+            font-size 18px
+            color #FFFFFF
+            overflow hidden
+            .chat-name
+            .user-name
+                display inline-block
+                padding 4px 5px
+                &.active
+                    background-color #202225
+            .chat-name
+                &:after
+                    content '::'
+                    margin-left 12px
+            .user-name
+                &:before
+                    content '@'
+
+        &__settings
+            position relative
+            position relative
+            height 100%
+            width 10px
+            margin-left auto
+            [for="menuCbx"]
+                display flex
+                flex-flow column nowrap
+                justify-content center
+                align-items center
+                height 100%
+                cursor pointer
+                &:hover
+                    .burger
+                    .burger:before
+                    .burger:after
+                        background-color #FFFFFF
+            .cbx
+                display none
+                &:checked
+                    & ~ .menu
+                        visibility visible
+                        opacity 1
+                        transform translateX(0)
+            .burger
+                display block
+                height 6px
+                width 6px
+                background-color #888888
+                border-radius 50%
+                &:before
+                &:after
+                    position relative
+                    content ''
+                    display block
+                    height 6px
+                    width 6px
+                    background-color #888888
+                    border-radius 50%
+                &:before
+                    top -10px
+                &:after
+                    top 4px
+            .menu
+                position absolute
+                top calc(100% - 10px)
+                right 10px
+                padding 10px 20px
+                background-color #202225
+                border-radius 3px
+                visibility hidden
+                opacity 0
+                transform translateX(50%)
+                transition all .2s ease-in
+                &-list
+                    &__item
+                        color #DBDBDB
+                        font-size 14px
+                        white-space nowrap
+                        cursor pointer
+                        &:not(:first-child)
+                            margin-top 5px
+                        &:hover
+                            color #ffffff
+    &-body
+        padding 0 15px
+        flex-grow 1
+        overflow-y scroll
+        .list-msg
+            margin 20px 0
+            &__item
+                display flex
+                &:not(:first-child)
+                    margin-top 20px
+                &:not(:last-child)
+                    .msg
+                        &-cnt
+                            padding-bottom 10px
+                            border-bottom 1px solid #ffffff4f
+                &--system
+                    display flex
+                    justify-content center
+                    color #DBDBDB
+                    font-size 12px
+                    text-align center
+                .ava
+                    .image
+                        border-radius 50%
+                .msg
+                    padding 0 15px
+                    flex-grow 1
+                    &-sender
+                        margin-bottom 6px
+                        color white
+                    &-cnt
+                        color #DBDBDB
+                .date
+                    color #888888
+                    font-size 12px
+                
+    &-footer
+        display flex
+        padding 10px 15px
+        flex 0 0 80px
+        border-top 1px solid #00000073
+        &__ava
+            .image
+                border-radius 50%
+        &__msg
+            padding 0 15px
+            flex-grow 1
+            .textarea
+                width 100%
+                height 100%
+                max-height 82px
+                background-color #292B2F
+                border 1px solid #202225
+                border-radius 3px
+                cursor text
+                color #DBDBDB
+                overflow-y auto
+                &:hover
+                &.active
+                    background-color #40444B
+                &-cnt
+                    height calc(100% - 10px)
+                    padding 5px 10px
+        &__act
+            .btn
+                background-color #7289da
+                color #ffffff
+                padding 10px 16px
+                border-radius 3px
+                cursor pointer
+                &:hover
+                    background-color #7289dabd
+
