@@ -1,13 +1,190 @@
 @import 'fonts.styl';
 
+
+*
+    box-sizing border-box !important
+
+body
+    overflow hidden
+
+
 .LAYOUT-APP
     min-height 100vh
     height 100%
-    overflow auto
     font-family Roboto
+
+
+.btn
+    display inline-block
+    color #ffffff
+    padding 0 16px
+    border-radius 3px
+    cursor pointer
+    line-height 32px
+    font-weight 500
+    &--info
+        background-color #7289da
+        &:hover
+            background-color #7289dabd
+    &--success
+        background-color #43B581
+        &:hover
+            background-color #409D73
+    &--error
+        background-color #F04747
+        &:hover
+            background-color #E14646
+
+.inp
+    padding 3px 10px
+    border-radius 3px
+    background-color #ababab
+    box-shadow none
+    border none
+    color #313131
+    font-weight 400
+    font-family Roboto
+
+
+.lobby
+    visibility hidden
+    position absolute
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
+    opacity 0
+    transition all .2s ease
+    &.show
+        visibility visible
+        opacity 1
+    &-card
+        position absolute
+        padding 10px 15px
+        background-color #36393f
+        border-radius 3px
+        box-shadow -2px 2px 5px 2px #00000085
+        transform translate(-50%, -50%)
+        transition all .2s linear
+        &__header
+            color #ffffff
+            font-size 18px
+            white-space nowrap
+        &__body
+            margin-top 30px
+            .ava-creator
+                display flex
+                flex-wrap wrap
+                &__prev
+                &__next
+                    display flex
+                    flex 0 0 15%
+                    max-width 15%
+                    flex-flow column nowrap
+                    justify-content space-between
+                    .item
+                        height 24px
+                        &-arrow
+                            height 24px
+                            width 24px
+                            fill #888888
+                            cursor pointer
+                            &:hover
+                                fill #FFFFFF
+                &__res
+                    display flex
+                    flex 0 1 70%
+                    max-width 70%
+                    align-items center
+                    padding 0 20px
+                    .image
+                        width 100%
+                // &__prev
+                //     margin-right 20px
+                // &__next
+                //     margin-left 20px
+                &__sep
+                    width 100%
+                &__clr
+                    width 100%
+                    margin-top 30px
+                    .clr-picker
+                        display flex
+                        flex-wrap wrap
+                        width 80%
+                        margin 0 auto
+                        justify-content space-between
+                        &__item
+                            height 24px
+                            width 24px
+                            border-radius 50%
+                            flex 0 0 24px
+                            max-width 24px
+                            opacity .8
+                            cursor pointer
+                            &.selected
+                                border 2px solid white
+                                opacity 1
+                            &:hover
+                                opacity 1
+                            &[data-clr="red"]
+                                background-color #F04747
+                            &[data-clr="blue"]
+                                background-color #7289DA
+                            &[data-clr="green"]
+                                background-color #43B581
+                            &[data-clr="purple"]
+                                background-color #904FAD
+                            &[data-clr="yellow"]
+                                background-color #FAA61A
+                            &[data-clr="cyan"]
+                                background-color #00BCD4
+                            &[data-clr="lime"]
+                                background-color #CDDC39
+                            &[data-clr="brown"]
+                                background-color #795548
+                        &__sep
+                            width 100%
+                            padding 4px 0
+
+
+        &__footer
+            margin-top 30px
+            text-align right
+        &--ava
+            width 230px
+            left 400px
+            opacity 0
+            .lobby-card
+                &__footer
+                    display flex
+                    justify-content space-between
+            &.current
+                left 0
+                opacity 1
+            &.done
+                opacity 0
+        &--name
+            left -200px
+            opacity 0
+            .lobby-card__body
+                .inp-error
+                    visibility hidden
+                    opacity 0
+                    font-size 12px
+                    color #F04747
+                    transition all .2s ease-in
+                    &.show
+                        visibility visible
+                        opacity 1
+            &.current
+                left 0
+                opacity 1
+
+
 
 .chat
     display flex
+    visibility hidden
     position absolute
     left 50%
     top 50%
@@ -20,6 +197,11 @@
     background-color #36393f
     border-radius 3px
     box-shadow -2px 2px 5px 2px #00000085
+    opacity 0
+    transition all .2s ease
+    &.show
+        visibility visible
+        opacity 1
     &-header
         display flex
         padding 0 15px
@@ -153,6 +335,7 @@
                 
     &-footer
         display flex
+        flex-wrap wrap
         padding 10px 15px
         flex 0 0 80px
         border-top 1px solid #00000073
@@ -162,29 +345,26 @@
         &__msg
             padding 0 15px
             flex-grow 1
-            .textarea
+            .txtar
                 width 100%
                 height 100%
-                max-height 82px
+                padding 5px 10px
+                resize none
                 background-color #292B2F
                 border 1px solid #202225
                 border-radius 3px
-                cursor text
                 color #DBDBDB
-                overflow-y auto
+                font-family Roboto
+                font-size 14px
                 &:hover
                 &.active
                     background-color #40444B
-                &-cnt
-                    height calc(100% - 10px)
-                    padding 5px 10px
         &__act
-            .btn
-                background-color #7289da
-                color #ffffff
-                padding 10px 16px
-                border-radius 3px
-                cursor pointer
-                &:hover
-                    background-color #7289dabd
+            @media screen and (max-width 391px)
+                margin-top 20px
+        &__sep
+            display none
+            @media screen and (max-width 391px)
+                display block
+                width 100%
 
