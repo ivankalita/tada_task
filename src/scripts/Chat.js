@@ -9,16 +9,38 @@ function Chat(options) {
     let history = [];
     let users = [];
 
-    function connect(rename = null) {
+    function connect(rename = null, historyFlag = false) {
         chatEl.querySelector('.chat-header__title .user-name').textContent = user;
         chatEl.querySelector('.chat-footer__ava .image').src = userAva;
         onMessage(rename)
 
         // сохраним текущего пользователя в localStorage
+        localStorage.setItem('chatUserName', user)
+        localStorage.setItem('chatUserAva', userAva)
+
+        // воссоздаём историю переписки
+        if (historyFlag) {
+            history = JSON.parse(localStorage.getItem('chatHistory'));
+
+            history.forEach(event => {
+                let listItemMsg = null
+                if (event.name !== undefined) {
+                    if (event.name === user) listItemMsg = templateMsgItem(true, event.name, event.text, event.created);
+                    else listItemMsg = templateMsgItem(false, event.name, event.text, event.created);
+                } else {
+                    listItemMsg = templateSysItem(false, event.text, event.created);
+                }
+
+                appendNewMsg(listItemMsg)
+            })
+        }
     }
 
     function close() {
         ws.close(1000, `${user} покинул чат`);
+        localStorage.removeItem('chatUserName');
+        localStorage.removeItem('chatUserAva');
+        localStorage.removeItem('chatHistory');
     }
 
     function setChatName(newName) {
@@ -54,7 +76,10 @@ function Chat(options) {
         ws.onmessage = function (event) {
             let data = JSON.parse(event.data);
             let listItemMsg = null;
-    
+            
+            history.push(data)
+            localStorage.setItem('chatHistory', JSON.stringify(history))
+
             if (data.typing === true) {
                 return
             }

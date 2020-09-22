@@ -12,10 +12,23 @@ import Faces from '../faces.json';
     let chatFooter = chatEl.querySelector('.chat-footer');
     let newMessageInp = document.getElementById('input-msg');
 
-    // fetch('https://api.adorable.io/avatars/list', {}).then(resp => console.log(resp))
-
     let chat = null;
     let userName = 'test123';
+
+    // проверим localStorage на сохраненный вход
+    if (localStorage.getItem('chatUserName')) {
+        chat = new Chat({
+            user: localStorage.getItem('chatUserName'),
+            userAva: localStorage.getItem('chatUserAva'),
+            box: chatEl.querySelector('.list-msg'),
+            el: document.getElementById('chat-one')
+        })
+
+        chat.init(null, true)
+        lobbyEl.classList.remove('show')
+        lobbyCardName.classList.remove('current')
+        chatEl.classList.add('show')
+    }
 
     lobbyCardName.querySelector('[lobby-next]').addEventListener('click', () => {
         if (lobbyCardName.querySelector('.inp').value.trim().length !== 0 && !lobbyCardName.querySelector('.inp').value.trim().match(/[^a-zA-Z0-9а-яА-Я_]+/g)) {
