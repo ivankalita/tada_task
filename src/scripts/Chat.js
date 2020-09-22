@@ -11,12 +11,14 @@ function Chat(options) {
 
     function connect(rename = null, historyFlag = false) {
         chatEl.querySelector('.chat-header__title .user-name').textContent = user;
+        chatEl.querySelector('.chat-header__title .chat-name').textContent = chat;
         chatEl.querySelector('.chat-footer__ava .image').src = userAva;
         onMessage(rename)
 
         // сохраним текущего пользователя в localStorage
         localStorage.setItem('chatUserName', user)
         localStorage.setItem('chatUserAva', userAva)
+        localStorage.setItem('chatName', chat)
 
         // воссоздаём историю переписки
         if (historyFlag) {
@@ -33,6 +35,8 @@ function Chat(options) {
 
                 appendNewMsg(listItemMsg)
             })
+        } else {
+            messageBox.innerHTML = ''
         }
     }
 
@@ -40,12 +44,14 @@ function Chat(options) {
         ws.close(1000, `${user} покинул чат`);
         localStorage.removeItem('chatUserName');
         localStorage.removeItem('chatUserAva');
+        localStorage.removeItem('chatName');
         localStorage.removeItem('chatHistory');
     }
 
     function setChatName(newName) {
         chat = newName;
         window.document.title = chat;
+        localStorage.setItem('chatName', chat)
     }
 
     function setUserName(newName) {
@@ -63,10 +69,12 @@ function Chat(options) {
 
             user = newName;
             chatEl.querySelector('.chat-header__title .user-name').textContent = user;
+            localStorage.setItem('chatUserName', user)
         }
     }
 
     function sendMessage(msg) {
+        console.log(msg)
         ws.send(JSON.stringify({
             "text": msg
         }))
@@ -77,6 +85,8 @@ function Chat(options) {
             let data = JSON.parse(event.data);
             let listItemMsg = null;
             
+            console.log(data)
+
             history.push(data)
             localStorage.setItem('chatHistory', JSON.stringify(history))
 

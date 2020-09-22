@@ -20,6 +20,7 @@ import Faces from '../faces.json';
         chat = new Chat({
             user: localStorage.getItem('chatUserName'),
             userAva: localStorage.getItem('chatUserAva'),
+            name: localStorage.getItem('chatName'),
             box: chatEl.querySelector('.list-msg'),
             el: document.getElementById('chat-one')
         })
@@ -29,6 +30,13 @@ import Faces from '../faces.json';
         lobbyCardName.classList.remove('current')
         chatEl.classList.add('show')
     }
+
+    window.addEventListener('beforeunload', function (e) {
+        if (chat) {
+            let now = new Date();
+            chat.sendMessage(`${localStorage.getItem('chatUserName')} покинул чат, ${now.getHours()}:${now.getMinutes() < 10 ? '0' + now.getMinutes() : now.getMinutes()}`);
+        }
+    })
 
     lobbyCardName.querySelector('[lobby-next]').addEventListener('click', () => {
         if (lobbyCardName.querySelector('.inp').value.trim().length !== 0 && !lobbyCardName.querySelector('.inp').value.trim().match(/[^a-zA-Z0-9а-яА-Я_]+/g)) {
@@ -152,6 +160,7 @@ import Faces from '../faces.json';
                 chatName.addEventListener('keydown', preventEnter)
             } else if (ev.target.dataset.action === 'exit') {
                 chat.exit();
+                chatHeader.querySelector('.chat-header__settings .cbx').checked = false;
                 chatEl.classList.remove('show')
                 lobbyEl.classList.add('show')
                 lobbyCardName.classList.add('current')
